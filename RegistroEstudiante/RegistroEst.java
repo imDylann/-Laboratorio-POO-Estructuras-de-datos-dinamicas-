@@ -4,6 +4,8 @@
  */
 package RegistroEstudiante;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author PC
@@ -16,6 +18,7 @@ public class RegistroEst extends javax.swing.JFrame {
    private RegistroEstudiante registro = new RegistroEstudiante();
     public RegistroEst() {
         initComponents();
+            setLocationRelativeTo(null);
         
     }
 
@@ -41,6 +44,7 @@ public class RegistroEst extends javax.swing.JFrame {
         EdadTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         IdTxt = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +71,11 @@ public class RegistroEst extends javax.swing.JFrame {
 
         ListarBtn.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ListarBtn.setText("Listar");
+        ListarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarBtnActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setText("Edad");
@@ -98,6 +107,11 @@ public class RegistroEst extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Nota: Si desea eliminar un estudiante solo ingrese el Id");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,9 +126,9 @@ public class RegistroEst extends javax.swing.JFrame {
                         .addComponent(AgregarEstudianteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(Btn)
-                        .addGap(43, 43, 43)
+                        .addGap(50, 50, 50)
                         .addComponent(ListarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,12 +146,16 @@ public class RegistroEst extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jLabel10)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(66, 66, 66)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,12 +171,13 @@ public class RegistroEst extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn)
                     .addComponent(AgregarEstudianteBtn)
                     .addComponent(ListarBtn))
-                .addGap(71, 71, 71))
+                .addGap(52, 52, 52)
+                .addComponent(jLabel10))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,11 +201,16 @@ public class RegistroEst extends javax.swing.JFrame {
         Estudiante est = new Estudiante(this.NombreTxt.getText(),this.CarreraTxt.getText(),this.EdadTxt.getText(),this.IdTxt.getText());
         if(!this.registro.VerificarEstudiante(est))
         this.registro.AgregarEstudiante(est);
+        this.NombreTxt.setText("");
+        this.CarreraTxt.setText("");
+        this.EdadTxt.setText("");
+        this.IdTxt.setText("");
     }//GEN-LAST:event_AgregarEstudianteBtnActionPerformed
 
     private void BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActionPerformed
         // TODO add your handling code here:
         this.registro.EliminarEstudiante(this.IdTxt.getText());
+          this.IdTxt.setText("");
     }//GEN-LAST:event_BtnActionPerformed
 
     private void NombreTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreTxtActionPerformed
@@ -197,6 +221,21 @@ public class RegistroEst extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IdTxtActionPerformed
 
+    private void ListarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarBtnActionPerformed
+        // TODO add your handling code here:
+     
+        ListarEstudiantes list = new ListarEstudiantes(obtenerStringDeEstudiantes( this.registro.ListarEstudiantes()));
+        list.setEnabled(true);
+        list.setVisible(true);
+    }//GEN-LAST:event_ListarBtnActionPerformed
+
+           public static String obtenerStringDeEstudiantes(ArrayList<Estudiante> estudiantes) {
+        StringBuilder sb = new StringBuilder();
+        for (Estudiante estudiante : estudiantes) {
+            sb.append(estudiante.toString()).append("\n");
+        }
+        return sb.toString();
+    }
     /**
      * @param args the command line arguments
      */
@@ -234,29 +273,18 @@ public class RegistroEst extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarEstudianteBtn;
-    private javax.swing.JButton AgregarEstudianteBtn1;
-    private javax.swing.JButton AgregarEstudianteBtn2;
     private javax.swing.JButton Btn;
-    private javax.swing.JButton Btn1;
-    private javax.swing.JButton Btn2;
     private javax.swing.JTextField CarreraTxt;
     private javax.swing.JTextField EdadTxt;
     private javax.swing.JTextField IdTxt;
     private javax.swing.JButton ListarBtn;
-    private javax.swing.JButton ListarBtn1;
-    private javax.swing.JButton ListarBtn2;
     private javax.swing.JTextField NombreTxt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

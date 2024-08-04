@@ -26,7 +26,7 @@ public class RegistroEstudiante {
    }
    
      public void EliminarEstudiante(String id){
-       estudiantes.removeIf(estudiante -> estudiante.getId() == id);
+       estudiantes.removeIf(estudiante -> estudiante.getId().equals(id));
        
    }
 
@@ -40,5 +40,5 @@ public class RegistroEstudiante {
     public String toString() {
         return "RegistroEstudiante{" + "estudiantes=" + estudiantes + '}';
     }
-     
+
 }
