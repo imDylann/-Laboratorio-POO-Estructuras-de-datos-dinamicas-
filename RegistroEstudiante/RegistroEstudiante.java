@@ -25,10 +25,17 @@ public class RegistroEstudiante {
        estudiantes.add(estudiante);
    }
    
-     public void EliminarEstudiante(Estudiante estudiante){
-       estudiantes.remove(estudiante);
+     public void EliminarEstudiante(String id){
+       estudiantes.removeIf(estudiante -> estudiante.getId() == id);
+       
    }
 
+     public boolean VerificarEstudiante(Estudiante estudiante){
+         if(estudiantes.contains(estudiante)){
+             return true;
+         }
+         return false;
+     }
     @Override
     public String toString() {
         return "RegistroEstudiante{" + "estudiantes=" + estudiantes + '}';
