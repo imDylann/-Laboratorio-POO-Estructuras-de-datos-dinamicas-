@@ -4,10 +4,38 @@
  */
 package Inventario;
 
+import java.util.HashSet;
+
 /**
  *
  * @author PC
  */
 public class inventario {
+    private  HashSet<Producto> inv;
+
+    public inventario() {
+        inv = new HashSet<>();
+    }
+
+    public HashSet<Producto> ListarProductos() {
+        return inv;
+    }
     
+    public void AgregarProducto(Producto producto){
+        inv.add(producto);
+    }
+    
+    public Producto BuscarProducto(int codigo){
+                for (Producto producto : inv) {
+            if (producto.getCodigo().equals(codigo)) {
+                return producto;
+            }
+        }
+        return null;
+
+    }
+            
+    public void EliminarProducto(int codigo){
+        inv.removeIf(Producto -> Producto.getCodigo().equals(codigo));
+    }
 }
