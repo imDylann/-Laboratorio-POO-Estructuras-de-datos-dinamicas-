@@ -4,6 +4,8 @@
  */
 package Inventario;
 
+import java.util.HashSet;
+
 /**
  *
  * @author ASUS
@@ -13,8 +15,12 @@ public class GUIInventario extends javax.swing.JFrame {
     /**
      * Creates new form GUIInventario
      */
+    private inventario inv;
     public GUIInventario() {
         initComponents();
+        inv = new inventario();
+             setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -57,15 +63,30 @@ public class GUIInventario extends javax.swing.JFrame {
 
         BtnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BtnAgregar.setText("Agregar");
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
+            }
+        });
 
         BtnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
 
         BtnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BtnBuscar.setText("Buscar");
 
         BtnLista.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BtnLista.setText("Lista de productos");
+        BtnLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnListaActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
@@ -155,6 +176,36 @@ public class GUIInventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        // TODO add your handling code here:
+        Producto producto = new Producto(this.TxtCodigo.getText(),this.TxtNombre.getText(),Double.parseDouble(this.TxtPrecio.getText()),Integer.parseInt(this.TxtCantidad.getText()));
+        inv.AgregarProducto(producto);
+        this.TxtCodigo.setText("");
+        this.TxtNombre.setText("");
+        this.TxtPrecio.setText("");
+        this.TxtCantidad.setText("");
+    }//GEN-LAST:event_BtnAgregarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        // TODO add your handling code here:
+        inv.EliminarProducto(Integer.parseInt (this.TxtCodigo.getText()));
+          this.TxtCodigo.setText("");
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListaActionPerformed
+        // TODO add your handling code here:
+        GUIListarInventario list = new GUIListarInventario(obtenerStringDeEstudiantes(inv.ListarProductos()));
+        list.setEnabled(true);
+        list.setVisible(true);
+    }//GEN-LAST:event_BtnListaActionPerformed
+
+   public static String obtenerStringDeEstudiantes(HashSet<Producto> productos) {
+        StringBuilder sb = new StringBuilder();
+        for (Producto producto : productos) {
+            sb.append(producto.toString()).append("\n");
+        }
+        return sb.toString();
+    }  
     /**
      * @param args the command line arguments
      */
