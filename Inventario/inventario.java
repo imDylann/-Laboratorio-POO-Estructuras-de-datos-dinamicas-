@@ -25,7 +25,7 @@ public class inventario {
         inv.add(producto);
     }
     
-    public Producto BuscarProducto(int codigo){
+    public Producto BuscarProducto(String codigo){
                 for (Producto producto : inv) {
             if (producto.getCodigo().equals(codigo)) {
                 return producto;
@@ -35,7 +35,7 @@ public class inventario {
 
     }
             
-    public void EliminarProducto(int codigo){
+    public void EliminarProducto(String codigo){
         inv.removeIf(Producto -> Producto.getCodigo().equals(codigo));
     }
 }
